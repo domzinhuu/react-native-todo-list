@@ -3,12 +3,13 @@ import { styles } from "./styles";
 import { TaskInput } from "../../components/TaskInput";
 import { Header } from "../../components/Header";
 import { Text } from "../../components/Text";
-import { Text as RNText } from "react-native";
-import { base } from "../../themes/base";
-import { EmptyTaskList } from "../../components/EmptyTaskList";
 import { TaskList } from "../../components/TaskList";
+import { useContext } from "react";
+import { taskContext } from "../../contexts/TaskContext";
+import { EmptyTaskList } from "../../components/EmptyTaskList";
 
 export function Home() {
+  const { taskList } = useContext(taskContext);
   return (
     <View style={styles.container}>
       <Header />
@@ -38,8 +39,7 @@ export function Home() {
         </View>
       </View>
 
-      {/* <EmptyTaskList /> */}
-      <TaskList />
+      {(!taskList.length && <EmptyTaskList />) || <TaskList />}
     </View>
   );
 }

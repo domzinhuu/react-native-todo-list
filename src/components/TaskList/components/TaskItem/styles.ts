@@ -15,15 +15,17 @@ export const styles = StyleSheet.create({
   },
   taskMessage: {
     flexShrink: 1,
+    flexDirection: "row",
+    alignSelf: "flex-start",
   },
   checkbox: {
     marginHorizontal: 8,
     width: 24,
     height: 24,
-    borderRadius:9999
+    borderRadius: 9999,
   },
   deleteBtn: {
-    marginLeft:8,
+    marginLeft: 8,
     width: 32,
     height: 32,
     justifyContent: "center",

@@ -1,6 +1,7 @@
 import { StatusBar, Text, View } from "react-native";
 import { Home } from "./src/screens/Home";
 import { styles } from "./styles";
+import { TaskProvider } from "./src/contexts/TaskContext";
 
 export default function App() {
   return (
@@ -11,7 +12,9 @@ export default function App() {
         translucent
       />
       <View style={[styles.container, {}]}>
-        <Home />
+        <TaskProvider>
+          <Home />
+        </TaskProvider>
       </View>
     </>
   );
