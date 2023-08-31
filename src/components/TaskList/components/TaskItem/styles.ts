@@ -15,8 +15,6 @@ export const styles = StyleSheet.create({
   },
   taskMessage: {
     flexShrink: 1,
-    flexDirection: "row",
-    alignSelf: "flex-start",
   },
   checkbox: {
     marginHorizontal: 8,

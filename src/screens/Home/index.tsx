@@ -9,7 +9,7 @@ import { taskContext } from "../../contexts/TaskContext";
 import { EmptyTaskList } from "../../components/EmptyTaskList";
 
 export function Home() {
-  const { taskList } = useContext(taskContext);
+  const { taskList, totalTasks, completeTasks } = useContext(taskContext);
   return (
     <View style={styles.container}>
       <Header />
@@ -22,7 +22,7 @@ export function Home() {
           </Text>
           <View style={styles.taskCountNumber}>
             <Text weight="bold" variant="white" size="sm">
-              0
+              {totalTasks}
             </Text>
           </View>
         </View>
@@ -33,7 +33,7 @@ export function Home() {
           </Text>
           <View style={styles.taskCountNumber}>
             <Text weight="bold" variant="white" size="sm">
-              0
+              {completeTasks}
             </Text>
           </View>
         </View>

@@ -6,10 +6,14 @@ import { useContext } from "react";
 import { Task, taskContext } from "../../contexts/TaskContext";
 
 export function TaskList() {
-  const { taskList, onToggle } = useContext(taskContext);
+  const { taskList, onToggle, onDelete } = useContext(taskContext);
 
   const handleToggle = (checked: boolean, task: Task) => {
     onToggle(checked, task);
+  };
+
+  const handleDeleteTask = (message: string) => {
+    onDelete(message);
   };
 
   return (
@@ -19,6 +23,7 @@ export function TaskList() {
           key={item.message}
           checked={!!item.finished}
           text={item.message}
+          onDeleteTask={handleDeleteTask}
           onChangeValue={(value) => handleToggle(value, item)}
         />
       ))}

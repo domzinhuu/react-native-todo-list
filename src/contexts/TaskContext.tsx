@@ -8,16 +8,17 @@ export interface Task {
 
 interface TaskContextProps {
   taskList: Task[];
+  totalTasks: number;
+  completeTasks: number;
   onToggle: (checked: boolean, task: Task) => void;
   onAdd: (message: string) => void;
+  onDelete: (message: string) => void;
 }
 
 export const taskContext = createContext({} as TaskContextProps);
 
 export function TaskProvider({ children }: PropsWithChildren) {
-  const [taskList, setTaskList] = useState<Task[]>([
-    { finished: false, message: "Aqui Ninja Jiraya, tiraria o Jiraya hafi hafi, comi te cu o daquitomevu" },
-  ]);
+  const [taskList, setTaskList] = useState<Task[]>([]);
 
   const addTask = (message: string) => {
     const exists = taskList.find(
@@ -45,9 +46,39 @@ export function TaskProvider({ children }: PropsWithChildren) {
     });
   };
 
+  const deleteTask = (message: string) => {
+    Alert.alert(
+      "Remover task",
+      `Tem certeza que deseja remover a task '${message}'?`,
+      [
+        {
+          text: "Sim",
+          onPress: () => {
+            setTaskList((prev) =>
+              prev.filter((item) => item.message !== message)
+            );
+          },
+        },
+        {
+          text: "Não",
+          style: "cancel",
+        },
+      ]
+    );
+  };
+
+  const totalTasks = taskList.length;
+  const completeTasks = taskList.filter((item) => item.finished).length;
   return (
     <taskContext.Provider
-      value={{ taskList, onToggle: toggleStatus, onAdd: addTask }}
+      value={{
+        taskList,
+        totalTasks,
+        completeTasks,
+        onToggle: toggleStatus,
+        onAdd: addTask,
+        onDelete: deleteTask,
+      }}
     >
       {children}
     </taskContext.Provider>

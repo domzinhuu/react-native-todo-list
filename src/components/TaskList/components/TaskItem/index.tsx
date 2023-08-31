@@ -10,9 +10,15 @@ interface TaskItemProps {
   checked: boolean;
   text: string;
   onChangeValue: (value: boolean) => void;
+  onDeleteTask: (message: string) => void;
 }
 
-export function TaskItem({ checked, text, onChangeValue }: TaskItemProps) {
+export function TaskItem({
+  checked,
+  text,
+  onChangeValue,
+  onDeleteTask,
+}: TaskItemProps) {
   return (
     <View style={styles.container}>
       <Checkbox
@@ -26,7 +32,10 @@ export function TaskItem({ checked, text, onChangeValue }: TaskItemProps) {
       <View style={styles.taskMessage}>
         <Text size="md">{text}</Text>
       </View>
-      <TouchableHighlight style={styles.deleteBtn}>
+      <TouchableHighlight
+        style={styles.deleteBtn}
+        onPress={() => onDeleteTask(text)}
+      >
         <Trash size={20} color={base.colors["gray"]["300"]} />
       </TouchableHighlight>
     </View>
